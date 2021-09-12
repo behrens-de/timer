@@ -1,7 +1,7 @@
 class Timer {
 
 
-  constructor({duration=1200,classname="time"}) {
+  constructor({ duration = 1200, classname = "time" }) {
     this.duration = duration;  // Number (Secounds)
     this.classname = classname;  // Number (Secounds)
   }
@@ -11,11 +11,31 @@ class Timer {
   _timeElapsed = 0; // Number (Secounds)
   _myinterval;
 
+  done() {
+    output.innerHTML = `${time.min}:${time.sek}`;
+  }
 
-  display(){
+  display() {
     const time = this.time();
     const output = document.querySelector(`.${this.classname}`);
-    output.innerHTML = `${time.min}:${time.sek}`;
+    const audio = new Audio('sound.mp3');
+
+    if ((time.min + time.sek) < 1) {
+      clearInterval(this._myinterval);
+
+      audio.addEventListener('loadeddata', () => {
+        audio.loop = true;
+        audio.play();
+        setTimeout(function () {
+          audio.loop = false;
+        }, 2500);
+      });
+
+      output.innerHTML = `Beendet`;
+    } else {
+      output.innerHTML = `${time.min}:${time.sek}`;
+    }
+
   }
 
   start() {
@@ -38,7 +58,7 @@ class Timer {
   reset() {
     this.pause();
     this._timeElapsed = 0;
-    this.display(); 
+    this.display();
   }
 
   time() {
@@ -61,19 +81,19 @@ const secUp = document.querySelector(".add-sec .up");
 const secDown = document.querySelector(".add-sec .down");
 const secLabel = document.querySelector(".add-sec .label");
 
-secUp.addEventListener('click',()=>{
+secUp.addEventListener('click', () => {
   const oldInt = parseInt(secLabel.innerHTML);
-  const newInt = oldInt+1;
-  if(newInt<60){
-    secLabel.innerHTML = newInt < 10 ? `0${newInt}`: newInt;
+  const newInt = oldInt + 1;
+  if (newInt < 60) {
+    secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
   }
 });
 
-secDown.addEventListener('click',()=>{
+secDown.addEventListener('click', () => {
   const oldInt = parseInt(secLabel.innerHTML);
-  const newInt = oldInt-1;
-  if(newInt>=0){
-    secLabel.innerHTML = newInt < 10 ? `0${newInt}`: newInt;
+  const newInt = oldInt - 1;
+  if (newInt >= 0) {
+    secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
   }
 });
 
@@ -81,46 +101,54 @@ const minUp = document.querySelector(".add-min .up");
 const minDown = document.querySelector(".add-min .down");
 const minLabel = document.querySelector(".add-min .label");
 
-minUp.addEventListener('click',()=>{
+minUp.addEventListener('click', () => {
   const oldInt = parseInt(minLabel.innerHTML);
-  const newInt = oldInt+1;
-  if(newInt<60){
-    minLabel.innerHTML = newInt < 10 ? `0${newInt}`: newInt;
+  const newInt = oldInt + 1;
+  if (newInt < 60) {
+    minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
   }
 });
 
-minDown.addEventListener('click',()=>{
+minDown.addEventListener('click', () => {
   const oldInt = parseInt(minLabel.innerHTML);
-  const newInt = oldInt-1;
-  if(newInt>=0){
-    minLabel.innerHTML = newInt < 10 ? `0${newInt}`: newInt;
+  const newInt = oldInt - 1;
+  if (newInt >= 0) {
+    minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
   }
 });
 
-
+const timerSettings = document.querySelector(".set-new-timer");
 const setTime = document.querySelector(".set-time");
 
-setTime.addEventListener('click',()=>{
+setTime.addEventListener('click', () => {
 
   const min = parseInt(minLabel.innerHTML);
   const sec = parseInt(secLabel.innerHTML);
-  const duration = min*60+sec;
+  const duration = min * 60 + sec;
 
-  myTimer(duration)
+  timerSettings.classList.add('no-display');
+
+  myTimer(duration);
 });
 
 
 
 // Contro
-function myTimer(duration = 99){
-const timer = new Timer({duration:duration});
-timer.display();
-const button = document.querySelectorAll("button");
-button.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    timer[btn.dataset.btn]();
+function myTimer(duration = 99) {
+  const timer = new Timer({ duration: duration });
+  timer.display();
+  const button = document.querySelectorAll("button");
+  button.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      timer[btn.dataset.btn]();
+    });
   });
-});
 }
 
-myTimer();
+// myTimer();
+const addBtn = document.querySelector(".add-btn");
+addBtn.addEventListener('click', ()=>{
+  addBtn.classList.toggle('open');
+  timerSettings.classList.toggle('no-display');
+
+});
