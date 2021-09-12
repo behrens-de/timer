@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 
-body {
-  background-image: linear-gradient(
+
+:root{
+  --bg: linear-gradient(
     to right top,
     #d16ba5,
     #c777b9,
@@ -17,6 +18,10 @@ body {
     #0abdc7,
     #2ebfb5
   );
+}
+
+body {
+  background-image: var(--bg);
   font-family: "Poppins", sans-serif;
 }
 
@@ -58,6 +63,18 @@ body {
     background: rgba(0, 0, 0, 0.75);
 }
 
+.set-new-timer{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .new-timer{
 display: flex;
 flex-direction: column;
@@ -65,8 +82,16 @@ background: #fff;
 justify-content: center;
 align-items: center;
 margin: 0 auto;
-padding: 2rem 0;
-width: 360px;
+width: 320px;
+bottom: 0;
+left: calc(50% - 160px);
+box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.6);
+border-radius: 1.2rem;
+overflow: hidden;
+}
+
+.no-display{
+  display: none !important;
 }
 
 .new-timer h2{
@@ -74,54 +99,90 @@ width: 360px;
   padding: 0;
   font-weight: 300;
   font-size: 1.1rem;
-  height: 2.4rem;
-  line-height: 2.4rem;
+  text-align: center;
+  height: 1.6rem;
+  line-height: 1.6rem;
   color: rgba(0, 0, 0, 0.5);
-  width: 150px
 }
+
+.time-wrap{
+  display: flex;
+  flex-direction: row;
+}
+
 .add-btn{
   bottom: 1.2rem;
   right: 1.2rem;
   border-radius: 50%;
   position: fixed;
-  background: rgba(0, 0, 0, 0.5);
   text-align: center;
   font-size: 1.6rem;
-  color: #fff;
   line-height: 3.2rem;
   width: 3.2rem;
   height: 3.2rem;
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.85);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 
 .up, .down, .label{
-  width: 2.4rem;
-  height: 2.4rem;
-  line-height: 2.4rem;
-  float: left;
+  width: 100%;
   text-align: center;
-  border-radius: 50%;
 }
 
-.up{
-  color: green;
+.up, .down{
+  height: 1.6rem;
+  line-height: 1.6rem;
+  border-radius: .8rem;
+  background: #ddd;
+  color: #aaa;
 }
-
-.down{
-  color: red;
-}
-
 
 .label{
   color: rgba(0, 0, 0, 0.75);
+  font-size: 1.3rem;
+  line-height: 2.3rem;
+  height: 2.3rem;
   font-weight: 600;
 
 }
 
 .add-min, .add-sec{
   display: flex;
-  background: #eee;
+  flex-direction: column;
   float: left;
-  border: 1px solid #ddd;
+  box-sizing: border-box;
+  width: 80px;
   margin: 5px;
+}
+
+.set-time{
+  background: var(--bg);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+  width: calc(100% - 40px);
+margin: 10px 20px;
+height: 2.4rem;
+line-height: 2.4rem;
+border-radius: 1.2rem;
+text-align: center;
+color: #fff;
+}
+
+.timer-name{
+  font-weight: 200;
+  width: 100%;
+  line-height: 2.4rem;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  border-bottom: 1px dashed #ddd;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.open{
+  transform: rotate(0deg);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
 }
