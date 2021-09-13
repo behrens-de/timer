@@ -1,6 +1,6 @@
 class Timer {
 
-  constructor({ duration = 1200, classname = "time", name="Panda Timer" }) {
+  constructor({ duration = 1200, classname = "time", name = "Panda Timer" }) {
     this.name = name;  // Number (Secounds)
     this.duration = duration;  // Number (Secounds)
     this.classname = classname;  // Number (Secounds)
@@ -34,7 +34,7 @@ class Timer {
       output.innerHTML = `Beendet`;
     } else {
       //console.log(output.previousSibling.previousSibling);
-     output.previousSibling.previousSibling.innerHTML = this.name;
+      output.previousSibling.previousSibling.innerHTML = this.name;
       output.innerHTML = `${time.min}:${time.sek}`;
     }
 
@@ -90,8 +90,61 @@ controls.forEach((button) => {
   });
 });
 
-
 // Edit Timer
+const editBTN = document.querySelector('.add-btn');
+const editArea = document.querySelector('.edit-timer');
+editBTN.addEventListener('click', editTimer);
+
+function editTimer() {
+  editArea.classList.toggle('no-display');
+  this.classList.toggle('open');
+  // Stop und Restart
+  
+  pandaTimer._started ? pandaTimer._started=false: pandaTimer._started=true;
+
+  console.log(pandaTimer._started);
+}
+
+// Set new data to Timer
+const setNewTime = document.querySelector('.set-time');
+setNewTime.addEventListener('click', newTimerInfo);
+
+function newTimerInfo() {
+  const min = parseInt(minLabel.innerHTML);
+  const sec = parseInt(secLabel.innerHTML);
+  const duration = (min * 60) + sec;
+  // Set New Time
+
+  pandaTimer.duration = duration;
+  pandaTimer.reset();
+  pandaTimer.display();
+  editBTN.click();
+
+}
+
+// Secounds 
+const secUp = document.querySelector(".add-sec .up");
+const secDown = document.querySelector(".add-sec .down");
+const secLabel = document.querySelector(".add-sec .label");
+secUp.addEventListener('click', () => countUpDown(secLabel, +1));
+secDown.addEventListener('click', () => countUpDown(secLabel, -1));
+// Minutes
+const minUp = document.querySelector(".add-min .up");
+const minDown = document.querySelector(".add-min .down");
+const minLabel = document.querySelector(".add-min .label");
+minUp.addEventListener('click', () => countUpDown(minLabel, +1));
+minDown.addEventListener('click', () => countUpDown(minLabel, -1));
+
+function countUpDown(label, count) {
+  const oldInt = parseInt(label.innerHTML);
+  const newInt = oldInt + count; // +1 | -1
+  if (newInt < 60 && newInt >= 0) {
+    label.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
+  }
+}
+
+
+
 
 // const addTimer = document.querySelectorAll(".add-btn");
 // const secUp = document.querySelector(".add-sec .up");

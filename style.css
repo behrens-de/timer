@@ -63,7 +63,7 @@ body {
     background: rgba(0, 0, 0, 0.75);
 }
 
-.set-new-timer{
+.edit-timer{
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -120,20 +120,21 @@ overflow: hidden;
   line-height: 3.2rem;
   width: 3.2rem;
   height: 3.2rem;
-  transform: rotate(45deg);
   background: rgba(255, 255, 255, 0.85);
   color: rgba(0, 0, 0, 0.75);
-  transition: top ease-in-out 3s;
+  margin-top: calc(100vh - (5.6rem));
+  transition: background-color, transform, margin .8s;
 }
 
 .open{
   transform: rotate(0deg);
   background: rgba(0, 0, 0, 0.5);
+  transform: rotate(45deg);
+  margin-top: 0;
   color: #fff;
-  top: auto;
-  bottom: 1.2rem;
-  transition: all .5s;
 }
+
+
 
 
 .up, .down, .label{
