@@ -111,7 +111,7 @@ overflow: hidden;
 }
 
 .add-btn{
-  bottom: 1.2rem;
+  top: 1.2rem;
   right: 1.2rem;
   border-radius: 50%;
   position: fixed;
@@ -123,6 +123,16 @@ overflow: hidden;
   transform: rotate(45deg);
   background: rgba(255, 255, 255, 0.85);
   color: rgba(0, 0, 0, 0.75);
+  transition: top ease-in-out 3s;
+}
+
+.open{
+  transform: rotate(0deg);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  top: auto;
+  bottom: 1.2rem;
+  transition: all .5s;
 }
 
 
@@ -181,8 +191,3 @@ color: #fff;
   font-size: 1.4rem;
 }
 
-.open{
-  transform: rotate(0deg);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-}

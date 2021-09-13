@@ -1,7 +1,7 @@
 class Timer {
 
-
-  constructor({ duration = 1200, classname = "time" }) {
+  constructor({ duration = 1200, classname = "time", name="Panda Timer" }) {
+    this.name = name;  // Number (Secounds)
     this.duration = duration;  // Number (Secounds)
     this.classname = classname;  // Number (Secounds)
   }
@@ -33,6 +33,8 @@ class Timer {
 
       output.innerHTML = `Beendet`;
     } else {
+      //console.log(output.previousSibling.previousSibling);
+     output.previousSibling.previousSibling.innerHTML = this.name;
       output.innerHTML = `${time.min}:${time.sek}`;
     }
 
@@ -73,82 +75,108 @@ class Timer {
 }
 
 
+const pandaTimer = new Timer({});
 
-const addTimer = document.querySelectorAll(".add-btn");
+// init the display
+pandaTimer.display();
 
+// control buttons
+const controls = document.querySelectorAll('button');
 
-const secUp = document.querySelector(".add-sec .up");
-const secDown = document.querySelector(".add-sec .down");
-const secLabel = document.querySelector(".add-sec .label");
-
-secUp.addEventListener('click', () => {
-  const oldInt = parseInt(secLabel.innerHTML);
-  const newInt = oldInt + 1;
-  if (newInt < 60) {
-    secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-  }
-});
-
-secDown.addEventListener('click', () => {
-  const oldInt = parseInt(secLabel.innerHTML);
-  const newInt = oldInt - 1;
-  if (newInt >= 0) {
-    secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-  }
-});
-
-const minUp = document.querySelector(".add-min .up");
-const minDown = document.querySelector(".add-min .down");
-const minLabel = document.querySelector(".add-min .label");
-
-minUp.addEventListener('click', () => {
-  const oldInt = parseInt(minLabel.innerHTML);
-  const newInt = oldInt + 1;
-  if (newInt < 60) {
-    minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-  }
-});
-
-minDown.addEventListener('click', () => {
-  const oldInt = parseInt(minLabel.innerHTML);
-  const newInt = oldInt - 1;
-  if (newInt >= 0) {
-    minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-  }
-});
-
-const timerSettings = document.querySelector(".set-new-timer");
-const setTime = document.querySelector(".set-time");
-
-setTime.addEventListener('click', () => {
-
-  const min = parseInt(minLabel.innerHTML);
-  const sec = parseInt(secLabel.innerHTML);
-  const duration = min * 60 + sec;
-
-  timerSettings.classList.add('no-display');
-
-  myTimer(duration);
-});
-
-
-
-// Contro
-function myTimer(duration = 99) {
-  const timer = new Timer({ duration: duration });
-  timer.display();
-  const button = document.querySelectorAll("button");
-  button.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      timer[btn.dataset.btn]();
-    });
+// Start, Stopp and Reset Timer
+controls.forEach((button) => {
+  button.addEventListener("click", () => {
+    pandaTimer[button.dataset.btn]();
   });
-}
-
-// myTimer();
-const addBtn = document.querySelector(".add-btn");
-addBtn.addEventListener('click', ()=>{
-  addBtn.classList.toggle('open');
-  timerSettings.classList.toggle('no-display');
-
 });
+
+
+// Edit Timer
+
+// const addTimer = document.querySelectorAll(".add-btn");
+// const secUp = document.querySelector(".add-sec .up");
+// const secDown = document.querySelector(".add-sec .down");
+// const secLabel = document.querySelector(".add-sec .label");
+
+// secUp.addEventListener('click', () => {
+//   const oldInt = parseInt(secLabel.innerHTML);
+//   const newInt = oldInt + 1;
+//   if (newInt < 60) {
+//     secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
+//   }
+// });
+
+// secDown.addEventListener('click', () => {
+//   const oldInt = parseInt(secLabel.innerHTML);
+//   const newInt = oldInt - 1;
+//   if (newInt >= 0) {
+//     secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
+//   }
+// });
+
+// const minUp = document.querySelector(".add-min .up");
+// const minDown = document.querySelector(".add-min .down");
+// const minLabel = document.querySelector(".add-min .label");
+
+// minUp.addEventListener('click', () => {
+//   const oldInt = parseInt(minLabel.innerHTML);
+//   const newInt = oldInt + 1;
+//   if (newInt < 60) {
+//     minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
+//   }
+// });
+
+// minDown.addEventListener('click', () => {
+//   const oldInt = parseInt(minLabel.innerHTML);
+//   const newInt = oldInt - 1;
+//   if (newInt >= 0) {
+//     minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
+//   }
+// });
+
+// const timerSettings = document.querySelector(".set-new-timer");
+// const setTime = document.querySelector(".set-time");
+// const addBtn = document.querySelector(".add-btn");
+// // Headlines
+// const timerName = document.querySelector(".timer-name");
+// let timerNameH1 = document.querySelector(".timername");
+
+
+// setTime.addEventListener('click', () => {
+//   const min = parseInt(minLabel.innerHTML);
+//   const sec = parseInt(secLabel.innerHTML);
+//   const duration = min * 60 + sec;
+
+//   timerSettings.classList.add('no-display');
+//   addBtn.classList.toggle('open');
+//   timerNameH1.innerHTML = timerName.value;
+
+//   singleTimer.duration = duration;
+// });
+
+
+
+// // Contro
+// function myTimer(duration = 99) {
+
+//   singleTimer.display();
+//   singleTimer.start = false;
+//   const button = document.querySelectorAll("button");
+//   button.forEach((btn) => {
+//     btn.addEventListener("click", () => {
+//       singleTimer[btn.dataset.btn]();
+//     });
+//   });
+
+// }
+
+// // myTimer();
+
+// addBtn.addEventListener('click', ()=>{
+
+//   timerName.value = timerNameH1.innerHTML;
+
+//   addBtn.classList.toggle('open');
+//   timerSettings.classList.toggle('no-display');
+
+// });
