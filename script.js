@@ -178,92 +178,13 @@ function countUpDown(label, count) {
 }
 
 
+// Optimale Höhe des element 
+// Problem mit Safari Mobile
+optiHeight();
+window.addEventListener('resize',optiHeight);
 
 
-// const addTimer = document.querySelectorAll(".add-btn");
-// const secUp = document.querySelector(".add-sec .up");
-// const secDown = document.querySelector(".add-sec .down");
-// const secLabel = document.querySelector(".add-sec .label");
-
-// secUp.addEventListener('click', () => {
-//   const oldInt = parseInt(secLabel.innerHTML);
-//   const newInt = oldInt + 1;
-//   if (newInt < 60) {
-//     secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-//   }
-// });
-
-// secDown.addEventListener('click', () => {
-//   const oldInt = parseInt(secLabel.innerHTML);
-//   const newInt = oldInt - 1;
-//   if (newInt >= 0) {
-//     secLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-//   }
-// });
-
-// const minUp = document.querySelector(".add-min .up");
-// const minDown = document.querySelector(".add-min .down");
-// const minLabel = document.querySelector(".add-min .label");
-
-// minUp.addEventListener('click', () => {
-//   const oldInt = parseInt(minLabel.innerHTML);
-//   const newInt = oldInt + 1;
-//   if (newInt < 60) {
-//     minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-//   }
-// });
-
-// minDown.addEventListener('click', () => {
-//   const oldInt = parseInt(minLabel.innerHTML);
-//   const newInt = oldInt - 1;
-//   if (newInt >= 0) {
-//     minLabel.innerHTML = newInt < 10 ? `0${newInt}` : newInt;
-//   }
-// });
-
-// const timerSettings = document.querySelector(".set-new-timer");
-// const setTime = document.querySelector(".set-time");
-// const addBtn = document.querySelector(".add-btn");
-// // Headlines
-// const timerName = document.querySelector(".timer-name");
-// let timerNameH1 = document.querySelector(".timername");
-
-
-// setTime.addEventListener('click', () => {
-//   const min = parseInt(minLabel.innerHTML);
-//   const sec = parseInt(secLabel.innerHTML);
-//   const duration = min * 60 + sec;
-
-//   timerSettings.classList.add('no-display');
-//   addBtn.classList.toggle('open');
-//   timerNameH1.innerHTML = timerName.value;
-
-//   singleTimer.duration = duration;
-// });
-
-
-
-// // Contro
-// function myTimer(duration = 99) {
-
-//   singleTimer.display();
-//   singleTimer.start = false;
-//   const button = document.querySelectorAll("button");
-//   button.forEach((btn) => {
-//     btn.addEventListener("click", () => {
-//       singleTimer[btn.dataset.btn]();
-//     });
-//   });
-
-// }
-
-// // myTimer();
-
-// addBtn.addEventListener('click', ()=>{
-
-//   timerName.value = timerNameH1.innerHTML;
-
-//   addBtn.classList.toggle('open');
-//   timerSettings.classList.toggle('no-display');
-
-// });
+function optiHeight(){
+  let vh = window.innerHeight *0.01;
+  document.documentElement.style.setProperty('--vh',`${vh}px`);
+}
