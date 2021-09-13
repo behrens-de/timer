@@ -94,16 +94,20 @@ class Timer {
 }
 
 
-const pandaTimer = new Timer({});
+const pandaTimer = new Timer({duration: 30});
 
 // init the display
 pandaTimer.display();
 // control buttons
 const controls = document.querySelectorAll('button');
-
+const clearControls = ()=>{
+  controls.forEach(btn => btn.classList.remove('active')); 
+} 
 // Start, Stopp and Reset Timer
 controls.forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", () => { 
+    clearControls();
+    button.classList.add('active');
     pandaTimer[button.dataset.btn]();
   });
 });
@@ -147,6 +151,7 @@ function newTimerInfo() {
   pandaTimer.duration = duration;
   pandaTimer.reset();
   pandaTimer.display();
+  clearControls();
   editBTN.click();
 
 }

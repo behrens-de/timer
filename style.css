@@ -48,7 +48,7 @@ body {
   justify-content: center;
 }
 
-.controlls button {
+.controls button {
   padding: 8px 18px;
   background: rgba(0, 0, 0, 0.5);
   border: none;
@@ -57,22 +57,29 @@ body {
   font-weight: 200;
   margin: 0 .05rem;
   border-radius: 2rem;
+  opacity: .7;
 }
 
-.controlls button:hover{
+.controls button:hover{
     background: rgba(0, 0, 0, 0.75);
 }
 
+.controls button.active{
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.75);
+}
+
 .edit-timer{
-  height: 100vh;
+  height: 70vh;
   width: 100vw;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  top: 15vh;
+  z-index: 500;
 }
 
 .new-timer{
@@ -88,6 +95,7 @@ left: calc(50% - 160px);
 box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.6);
 border-radius: 1.2rem;
 overflow: hidden;
+
 }
 
 .no-display{
@@ -124,6 +132,7 @@ overflow: hidden;
   color: rgba(0, 0, 0, 0.75);
   margin-top: calc(100vh - (5.6rem));
   transition: background-color, transform, margin .8s;
+  z-index: 200;
 
 }
 
@@ -219,4 +228,25 @@ color: #fff;
   border-radius: 2px;
   margin: 2px;
   transition: all .6s;
+}
+
+footer{
+  width: 100%;
+  position: fixed;
+  height: 2rem;
+  line-height: 2rem;
+  bottom: 0;
+  right: 0;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 75%;
+  text-align: center;
+  border-top: 1px dashed rgba(255, 255, 255, 0.25);
+  background-image:linear-gradient(
+    to right top,
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.10),
+    rgba(0, 0, 0, 0.15)
+  );
+  z-index: 100;
+
 }
