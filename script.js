@@ -10,6 +10,7 @@ class Timer {
   _interval = 1000; // Number (Milisecounds)
   _timeElapsed = 0; // Number (Secounds)
   _myinterval;
+  _isDone = false;
 
   done() {
     output.innerHTML = `${time.min}:${time.sek}`;
@@ -20,7 +21,19 @@ class Timer {
     const output = document.querySelector(`.${this.classname}`);
     const audio = new Audio('sound.mp3');
 
+    const timeLine = document.querySelector('.time-line-in');
+    
+    timeLine.style.backgroundColor = this.procent() > 80? 'red': 'white';
+    timeLine.style.width = `${this.procent()}%`;
+
+
+
+
+
     if ((time.min + time.sek) < 1) {
+
+      this._isDone = true;
+
       clearInterval(this._myinterval);
 
       audio.addEventListener('loadeddata', () => {
@@ -41,7 +54,7 @@ class Timer {
   }
 
   start() {
-    if (!this._started) {
+    if (!this._started && !this._isDone) {
       this._myinterval = setInterval(() => {
         this.display();
         this._timeElapsed++;
@@ -51,17 +64,23 @@ class Timer {
   }
 
   pause() {
-    if (this._started) {
+    if (this._started && !this._isDone) {
       clearInterval(this._myinterval);
     }
     this._started = false;
   }
 
   reset() {
+    this._isDone = false;
     this.pause();
     this._timeElapsed = 0;
     this.display();
   }
+
+  procent() {
+    return Math.round(this._timeElapsed / this.duration * 100)
+  }
+
 
   time() {
     const now = this.duration - this._timeElapsed;
@@ -79,7 +98,6 @@ const pandaTimer = new Timer({});
 
 // init the display
 pandaTimer.display();
-
 // control buttons
 const controls = document.querySelectorAll('button');
 
@@ -95,14 +113,24 @@ const editBTN = document.querySelector('.add-btn');
 const editArea = document.querySelector('.edit-timer');
 editBTN.addEventListener('click', editTimer);
 
+let timerName = document.querySelector(".timer-name");
+
 function editTimer() {
   editArea.classList.toggle('no-display');
   this.classList.toggle('open');
-  // Stop und Restart
-  
-  pandaTimer._started ? pandaTimer._started=false: pandaTimer._started=true;
 
-  console.log(pandaTimer._started);
+
+  timerName.value = pandaTimer.name;
+
+  // Stop und Restart
+
+
+  if (this.classList.contains('open')) {
+    this.innerHTML = `<i class="fas fa-plus"></i>`;
+  } else {
+    this.innerHTML = `<i class="fas fa-cog"></i>`;
+  }
+
 }
 
 // Set new data to Timer
@@ -115,6 +143,7 @@ function newTimerInfo() {
   const duration = (min * 60) + sec;
   // Set New Time
 
+  pandaTimer.name = timerName.value.length > 2 ? timerName.value : pandaTimer.name;
   pandaTimer.duration = duration;
   pandaTimer.reset();
   pandaTimer.display();

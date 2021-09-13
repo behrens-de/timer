@@ -124,6 +124,7 @@ overflow: hidden;
   color: rgba(0, 0, 0, 0.75);
   margin-top: calc(100vh - (5.6rem));
   transition: background-color, transform, margin .8s;
+
 }
 
 .open{
@@ -134,7 +135,13 @@ overflow: hidden;
   color: #fff;
 }
 
-
+@keyframes btn {
+  0% { opacity: 1; margin-right: -50px }
+  20% { opacity: .5;}
+  50% { opacity: 0;}
+  70%{ opacity: .5;}
+  100%{ opacity: 1; margin-right: 0px;}
+}
 
 
 .up, .down, .label{
@@ -192,3 +199,24 @@ color: #fff;
   font-size: 1.4rem;
 }
 
+
+
+.time-line{
+  width: 300px;
+  background:rgba(255, 255, 255, 0.25);
+  height: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+}
+
+.time-line-in{
+  width: 0%;
+  background: #ffffff;
+  height: 4px;
+  border-radius: 2px;
+  margin: 2px;
+  transition: all .6s;
+}
